@@ -1,0 +1,37 @@
+[
+    {
+        "name":"Afghanistan",
+        "alpha-2":"AF",
+        "alpha-3":"AFG",
+        "country-code":"004",
+        "iso_3166-2":"ISO 3166-2:AF",
+        "region-code":"142",
+        "sub-region-code":"034"
+    },
+    {
+        "name":"China",
+        "alpha-2":"CN",
+        "alpha-3":"CHN",
+        "country-code":"156",
+        "iso_3166-2":"ISO 3166-2:CN",
+        "region-code":"142",
+        "sub-region-code":"030"
+    },
+    {
+        "name":"Australia",
+        "alpha-2":"AU",
+        "alpha-3":"AUS",
+        "country-code":"036",
+        "iso_3166-2":"ISO 3166-2:AU",
+        "region-code":"009",
+        "sub-region-code":"053"
+    },
+    {"name":"Italy",
+        "alpha-2":"IT",
+        "alpha-3":"ITA",
+        "country-code":"380",
+        "iso_3166-2":"ISO 3166-2:IT",
+        "region-code":"150",
+        "sub-region-code":"039"
+    }
+    ]

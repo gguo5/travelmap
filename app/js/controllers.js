@@ -8,6 +8,7 @@ angular.module('myApp.controllers', []).
             $scope.countryNames = [];
             $scope.countryCodes = [];
             $scope.selectedTab =1;
+            $scope.beenTo = [];
             
             $http.get('data/countries_test.json').success(function(data) {
                 $scope.countries = data;
@@ -22,6 +23,20 @@ angular.module('myApp.controllers', []).
             $scope.changeCurrentCountry = function(code, name) {
                 $scope.currentCountryCode= code; 
                 $scope.currentCountryName = name;
+                
+                var flag=0;
+                angular.forEach($scope.beenTo, function(item){   
+                    for(var i = 0; i < $scope.beenTo.length; i++){
+                        if(item.search(name) >= 0) {
+                            flag++;
+                        }
+                    }
+                });
+                if(flag==0){         
+                    $scope.beenTo.push(name);
+                }
+                
+               
             };
         }])
 

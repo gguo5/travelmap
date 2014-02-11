@@ -7,8 +7,16 @@
         <input type="text" ng-model="selected" typeahead="country for country in countryNames | filter:$viewValue | limitTo:8" class="form-control">
     </div>
 
+    <div class="input-group" style="width: 400px">
+        <span class="input-group-addon">Search:</span>
+        <input type="text" ng-model="selected" typeahead="country for country in countryNames | filter:$viewValue | limitTo:8" class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Add</button>
+        </span>
+    </div>
+
     <div class="tabbable tabs-below">
-        <ul class="nav nav-pills">
+        <ul class="nav nav-tabs">
             <li ng-class="{active: selectedTab == 1}">
                 <a href="" ng-click="selectedTab = 1;">Asian</a>
             </li>
@@ -20,17 +28,32 @@
             </li>
         </ul>
         <div class="tab-content" ng-show="selectedTab == 1" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '142' }">
-           {{country.name}}, {{country['alpha-2']}}
+            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
         <div class="tab-content" ng-show="selectedTab == 2" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '150' }">
-            {{country.name}}, {{country['alpha-2']}}
+            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
         <div class="tab-content" ng-show="selectedTab == 3" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '009' }">
-           {{country.name}}, {{country['alpha-2']}}
+            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
     </div>
+
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <span class="navbar-brand">Been:</span>
+            </div>
+            <div ng-model="beenTo">
+                <span class="label label-success" ng-repeat = "country in beenTo">{{country}}</span> 
+            </div>
+            
+           
+        </div><!-- /.container-fluid -->
+    </nav>
 
     <br />
 

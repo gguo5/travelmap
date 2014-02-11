@@ -1,9 +1,44 @@
 <p>This is the partial for view 1.</p>
 <div ng-controller = 'MyCtrl1'>
+
+    <div class='container-fluid' style="width: 400px">
+        <h4>Static arrays</h4>
+        <pre>Model: {{selected}}</pre>
+        <input type="text" ng-model="selected" typeahead="country for country in countryNames | filter:$viewValue | limitTo:8" class="form-control">
+    </div>
+
+    <div class="tabbable tabs-below">
+        <ul class="nav nav-pills">
+            <li ng-class="{active: selectedTab == 1}">
+                <a href="" ng-click="selectedTab = 1;">Asian</a>
+            </li>
+            <li ng-class="{active: selectedTab == 2}">
+                <a href="" ng-click="selectedTab = 2;">Europe</a>
+            </li>
+            <li ng-class="{active: selectedTab == 3}">
+                <a href="" ng-click="selectedTab = 3;">Oceania</a>
+            </li>
+        </ul>
+        <div class="tab-content" ng-show="selectedTab == 1" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '142' }">
+           {{country.name}}, {{country['alpha-2']}}
+        </div>
+
+        <div class="tab-content" ng-show="selectedTab == 2" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '150' }">
+            {{country.name}}, {{country['alpha-2']}}
+        </div>
+
+        <div class="tab-content" ng-show="selectedTab == 3" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '009' }">
+           {{country.name}}, {{country['alpha-2']}}
+        </div>
+    </div>
+
+    <br />
+
     Current Country: {{currentCountryCode}}  {{currentCountryName}}
-   
+    Search: <input ng-model="query">
+    <div id="status">Current filter: {{query}}</div>
     <ul>
-        <li ng-repeat="country in countries">   
+        <li ng-repeat="country in countries | filter:query">   
             <span ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
         </li>
     </ul>

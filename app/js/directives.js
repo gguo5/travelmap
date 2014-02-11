@@ -51,7 +51,7 @@ angular.module('myApp.directives', []).
            
                 
                 $scope.$watchCollection('[currentCountryCode, currentCountryName]', function(newCountry) {        
-                    console.log("newcode: "+newCountry);
+                    //console.log("newcode: "+newCountry);
                     addCountry(newCountry);
                    
                 });
@@ -71,6 +71,10 @@ angular.module('myApp.directives', []).
             }
         }
     })
+    
+    
+ 
+    
     
     .directive('myCurrentTime', function($interval, dateFilter) {
  

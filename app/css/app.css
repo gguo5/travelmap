@@ -35,14 +35,29 @@
 }
 
 a.remove-country{
-   text-decoration:none;
-   padding-left: 5px;
-   padding-right: 5px;
-   color:white;
-   opacity: .75;
-   cursor: pointer;
+    text-decoration:none;
+    padding-left: 5px;
+    padding-right: 5px;
+    color:white;
+    opacity: .75;
+    cursor: pointer;
 }
 
 a.remove-country:hover{
     color: #97DDA8;
+}
+
+div.countrylist{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #cccccc;
+    word-wrap: break-word;
+}
+
+span.countrydisplay{
+    margin: 2px;
+    padding: 2px 5px 2px 5px; 
+    line-height: 1.8;
+    word-wrap; normal;
+    display: inline-block;
 }

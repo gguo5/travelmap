@@ -26,17 +26,18 @@
                 <a href="" ng-click="selectedTab = 3;">Oceania</a>
             </li>
         </ul>
-        <div class="tab-content" ng-show="selectedTab == 1" ng-model="countries">
-            <span class="label label-info label-cursor" ng-repeat = "country in countries | filter: { 'region-code': '142' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
+        <div class="tab-content countrylist" ng-show="selectedTab == 1" ng-model="countries">
+            <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '142' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
+        </div>
+        
+        <div class="tab-content countrylist" ng-show="selectedTab == 2" ng-model="countries">
+            <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '150' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
+        </div>
+        
+        <div class="tab-content countrylist" ng-show="selectedTab == 3" ng-model="countries">
+            <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '009' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
-        <div class="tab-content" ng-show="selectedTab == 2" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '150' }">
-            <span class="label label-info label-cursor" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
-        </div>
-
-        <div class="tab-content" ng-show="selectedTab == 3" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '009' }">
-            <span class="label label-info label-cursor" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
-        </div>
     </div>
 
 
@@ -47,7 +48,7 @@
             <div class="navbar-header">
                 <span class="navbar-brand">Been to:</span>
             </div>
-            <span ng-repeat="country in beenTo" class="label label-success">
+            <span ng-repeat="country in beenTo" class="label label-success countrydisplay">
                {{country}}<a class="remove-country" ng-click="delCountry($index,country)">&times;</a>
             </span>
         </div><!-- /.container-fluid -->

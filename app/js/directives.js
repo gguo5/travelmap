@@ -54,6 +54,7 @@ angular.module('myApp.directives', []).
             
             
                 $scope.delCountry = function(index,name){
+                   // console.log(index+" "+name);
                      
                     $scope.beenTo.splice(index, 1);     
                     
@@ -62,7 +63,8 @@ angular.module('myApp.directives', []).
            
                     angular.forEach($scope.countries, function(country){   
                         for(var i = 0; i < $scope.countries.length; i++){
-                            if(country.name.search(name) >= 0) {
+                            if(country.name==name) {
+                               // console.log(country.name+" "+country['alpha-2']);
                                 code = country['alpha-2'];
                                 break;
                             }
@@ -76,7 +78,7 @@ angular.module('myApp.directives', []).
                     }
                     if(foundRows.length!=0){    
                     for (var i = 0, maxrows = foundRows.length; i < maxrows; i++) {
-                    //    console.log("del found row: should always be 1:  "+foundRows.length+"row deled: "+foundRows[i]);
+                    // console.log("del found row: should always be 1:  "+foundRows.length+"row deled: "+foundRows[i]);
                         data.removeRow(foundRows[i]);
                         chart.draw(data,options);
                     }               
@@ -89,7 +91,7 @@ angular.module('myApp.directives', []).
                         column: 0, 
                         value: code
                     }]);
-                   // console.log("update foundExisiting.length: "+foundExisiting.length);
+                  //  console.log("update foundExisiting.length: "+foundExisiting.length);
                     
                     if(foundExisiting.length==0){
                         var r = Math.round(Math.random()*1000);
@@ -99,7 +101,7 @@ angular.module('myApp.directives', []).
                         },r,'Traveled']]);    
                         chart.draw(data, options);   
                     
-                       // console.log("row added: "+code+" "+ name);
+                  //      console.log("row added: "+code+" "+ name);
                     
                     }
                  

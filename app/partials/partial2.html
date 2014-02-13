@@ -7,6 +7,18 @@ Date format: <input ng-model="format">
 Current time is: <span my-current-time="format"></span>
 <br /><hr/>
 
+
+<div class='container-fluid'>
+    <button ng-click="focusinControl.takeTablet()">Call directive function</button>
+    <h4>In controller scope:</h4>
+    {{focusinControl}}
+    <h4>In directive scope:</h4>
+    <focusin control="focusinControl" />
+    
+  </div>
+
+
+
 <div class='container-fluid'>
 
     <h4>Static arrays</h4>

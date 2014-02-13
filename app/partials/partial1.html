@@ -1,6 +1,5 @@
 <p>This is the partial for view 1.</p>
 <div ng-controller = 'MyCtrl1'>
-
     <div class='container-fluid' style="width: 400px">
         <h4>Static arrays</h4>
         <pre>Model: {{selected}}</pre>
@@ -27,34 +26,34 @@
                 <a href="" ng-click="selectedTab = 3;">Oceania</a>
             </li>
         </ul>
-        <div class="tab-content" ng-show="selectedTab == 1" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '142' }">
-            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
+        <div class="tab-content" ng-show="selectedTab == 1" ng-model="countries">
+            <span class="label label-info label-cursor" ng-repeat = "country in countries | filter: { 'region-code': '142' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
         <div class="tab-content" ng-show="selectedTab == 2" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '150' }">
-            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
+            <span class="label label-info label-cursor" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
         <div class="tab-content" ng-show="selectedTab == 3" ng-model="countries" ng-repeat = "country in countries | filter: { 'region-code': '009' }">
-            <span class="label label-info label-cursor" ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
+            <span class="label label-info label-cursor" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
     </div>
 
 
+    
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <span class="navbar-brand">Been:</span>
+                <span class="navbar-brand">Been to:</span>
             </div>
-            <div ng-model="beenTo">
-                <span class="label label-success" ng-repeat = "country in beenTo">{{country}}</span> 
-            </div>
-            
-           
+            <span ng-repeat="country in beenTo" class="label label-success">
+               {{country}}<a class="remove-country" ng-click="delCountry($index,country)">&times;</a>
+            </span>
         </div><!-- /.container-fluid -->
     </nav>
 
+    <!-- 
     <br />
 
     Current Country: {{currentCountryCode}}  {{currentCountryName}}
@@ -66,5 +65,7 @@
         </li>
     </ul>
     Order by: {{orderProp}}  
+    
+    -->
     <div chart></div>
 </div>   

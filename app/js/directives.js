@@ -11,7 +11,12 @@ angular.module('myApp.directives', []).
     .directive('chart', function() {
         return {
             restrict: 'A',
+           
             link: function($scope, $elm, $attr) {
+                
+               
+               
+                
                 // Create the data table
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Country');
@@ -44,37 +49,97 @@ angular.module('myApp.directives', []).
                 options['tooltip']= tooltip;
                          
                 // Instantiate and draw our chart, passing in some options
-                var chart = new google.visualization.GeoChart($elm[0]);
-              
+                var chart = new google.visualization.GeoChart($elm[0]);             
                 chart.draw(data, options);
-                
+            
+            
+                $scope.delCountry = function(index,name){
+                     
+                    $scope.beenTo.splice(index, 1);     
+                    
+                    
+                    var code = '';
            
-                
-                $scope.$watchCollection('[currentCountryCode, currentCountryName]', function(newCountry) {        
-                    //console.log("newcode: "+newCountry);
-                    addCountry(newCountry);
-                   
-                });
-              
-                
-                function addCountry(country) {
-                    data.addRows([[{
-                        v:country[0],
-                        f:country[1]
-                    },0,'Traveled']]);    
-                    chart.draw(data, options);            
-                }
+                    angular.forEach($scope.countries, function(country){   
+                        for(var i = 0; i < $scope.countries.length; i++){
+                            if(country.name.search(name) >= 0) {
+                                code = country['alpha-2'];
+                                break;
+                            }
+                        }
+                    });
+                    if(code.length!=0){
+                        var foundRows = data.getFilteredRows([{
+                            column: 0, 
+                            value: code
+                        }]);
+                    }
+                    if(foundRows.length!=0){    
+                    for (var i = 0, maxrows = foundRows.length; i < maxrows; i++) {
+                    //    console.log("del found row: should always be 1:  "+foundRows.length+"row deled: "+foundRows[i]);
+                        data.removeRow(foundRows[i]);
+                        chart.draw(data,options);
+                    }               
+                    }
+                };  
  
+ 
+                $scope.updateMap = function(code,name) {                 
+                    var foundExisiting = data.getFilteredRows([{
+                        column: 0, 
+                        value: code
+                    }]);
+                   // console.log("update foundExisiting.length: "+foundExisiting.length);
+                    
+                    if(foundExisiting.length==0){
+                        var r = Math.round(Math.random()*1000);
+                        data.addRows([[{
+                            v:code,
+                            f:name
+                        },r,'Traveled']]);    
+                        chart.draw(data, options);   
+                    
+                       // console.log("row added: "+code+" "+ name);
+                    
+                    }
+                 
+                    var flag=0;
+                    angular.forEach($scope.beenTo, function(item){   
+                        for(var i = 0; i < $scope.beenTo.length; i++){
+                            if(item.search(name) >= 0) {
+                                flag++;
+                            }
+                        }
+                    });
+                    if(flag==0){         
+                        $scope.beenTo.push(name);
+                    }
                 
-                
-                
+                 
+                };
+              
             }
         }
     })
     
     
  
-    
+    .directive('focusin', function factory() {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div>A:{{control}}</div>',
+            scope: {
+                control: '='
+            },
+            link      : function (scope, element, attrs) {
+                scope.control.takenTablets = 0;
+                scope.control.takeTablet = function() {
+                    scope.control.takenTablets += 1;  
+                }
+            }
+        };
+    })
     
     .directive('myCurrentTime', function($interval, dateFilter) {
  

@@ -34,3 +34,15 @@
     cursor: pointer;
 }
 
+a.remove-country{
+   text-decoration:none;
+   padding-left: 5px;
+   padding-right: 5px;
+   color:white;
+   opacity: .75;
+   cursor: pointer;
+}
+
+a.remove-country:hover{
+    color: #97DDA8;
+}

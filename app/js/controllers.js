@@ -4,44 +4,31 @@
 
 angular.module('myApp.controllers', []).
     controller('MyCtrl1', ['$scope','$http',
-        function($scope, $http) {         
+        function($scope, $http) {   
             $scope.countryNames = [];
             $scope.countryCodes = [];
             $scope.selectedTab =1;
             $scope.beenTo = [];
+            $scope.delCountryCode = '';
             
-            $http.get('data/countries_test.json').success(function(data) {
+            $scope.closeAlert = function(index) {
+                $scope.beenTo.splice(index, 1);
+            };
+            
+            $http.get('data/countries.json').success(function(data) {
                 $scope.countries = data;
                 angular.forEach(data, function(item){                  
                     $scope.countryNames.push(item.name);
                     $scope.countryCodes.push(item['alpha-2']);
                 }); 
             });
-            $scope.orderProp = 'continentCode';           
-            $scope.currentCountryCode = '';
-            $scope.currentCountryName = '';
-            $scope.changeCurrentCountry = function(code, name) {
-                $scope.currentCountryCode= code; 
-                $scope.currentCountryName = name;
-                
-                var flag=0;
-                angular.forEach($scope.beenTo, function(item){   
-                    for(var i = 0; i < $scope.beenTo.length; i++){
-                        if(item.search(name) >= 0) {
-                            flag++;
-                        }
-                    }
-                });
-                if(flag==0){         
-                    $scope.beenTo.push(name);
-                }
-                
-               
-            };
         }])
 
 
     .controller('MyCtrl2', ['$scope','$http',function($scope,$http) {
+            
+        $scope.focusinControl = {
+        };    
             
         //    
         $scope.selected = undefined;

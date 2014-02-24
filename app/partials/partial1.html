@@ -1,12 +1,28 @@
-<p>This is the partial for view 1.</p>
 <div ng-controller = 'MyCtrl1'>
-    <div class='container-fluid' style="width: 400px">
-        <h4>Static arrays</h4>
-        <pre>Model: {{selected}}</pre>
-        <input type="text" ng-model="selected" typeahead="country for country in countryNames | filter:$viewValue | limitTo:8" class="form-control">
-    </div>
+     <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a ng-click="selectedTestItem.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selectedTestItem.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 
-    <div class="input-group" style="width: 400px">
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <div ng-show="selectedTestItem">Selection from a modal: {{ selectedTestItem }}</div>
+    
+    
+    
+    <div class="input-group">
         <span class="input-group-addon">Search:</span>
         <input type="text" ng-model="selected" typeahead="country for country in countryNames | filter:$viewValue | limitTo:8" class="form-control">
         <span class="input-group-btn">
@@ -25,6 +41,12 @@
             <li ng-class="{active: selectedTab == 3}">
                 <a href="" ng-click="selectedTab = 3;">Oceania</a>
             </li>
+            <li ng-class="{active: selectedTab == 4}">
+                <a href="" ng-click="selectedTab = 4;">Africa</a>
+            </li>
+            <li ng-class="{active: selectedTab == 5}">
+                <a href="" ng-click="selectedTab = 5;">Americas</a>
+            </li>
         </ul>
         <div class="tab-content countrylist" ng-show="selectedTab == 1" ng-model="countries">
             <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '142' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
@@ -36,6 +58,14 @@
         
         <div class="tab-content countrylist" ng-show="selectedTab == 3" ng-model="countries">
             <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '009' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
+        </div>
+        
+        <div class="tab-content countrylist" ng-show="selectedTab == 4" ng-model="countries">
+            <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '002' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
+        </div>
+        
+        <div class="tab-content countrylist" ng-show="selectedTab == 5" ng-model="countries">
+            <span class="label label-info label-cursor countrydisplay" ng-repeat = "country in countries | filter: { 'region-code': '019' }" ng-click="updateMap(country['alpha-2'], country.name)">{{country.name}}</span>
         </div>
 
     </div>
@@ -54,19 +84,5 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <!-- 
-    <br />
-
-    Current Country: {{currentCountryCode}}  {{currentCountryName}}
-    Search: <input ng-model="query">
-    <div id="status">Current filter: {{query}}</div>
-    <ul>
-        <li ng-repeat="country in countries | filter:query">   
-            <span ng-click="changeCurrentCountry(country['alpha-2'], country.name)">{{country.name}}</span>
-        </li>
-    </ul>
-    Order by: {{orderProp}}  
-    
-    -->
     <div chart></div>
 </div>   
